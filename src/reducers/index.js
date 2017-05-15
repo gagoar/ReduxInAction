@@ -14,10 +14,24 @@ const initialState = [
 ];
 
 export default function tasks(state = initialState, action) {
- if (action.type === 'CREATE_TASK') {
-   return state.concat(action.payload);
- }
+    if (action.type === 'CREATE_TASK') {
+        return state.concat(action.payload);
+    }
 
- return state;
+    if (action.type === 'EDIT_TASK') {
+        const { payload } = action;
+
+        return state.map(task => {
+            if (task.id === payload.id) {
+                return {
+                    ...task,
+                    ...payload.params
+                }
+            }
+
+            return task;
+        })
+    }
+    return state;
 }
 
