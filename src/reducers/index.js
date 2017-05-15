@@ -1,4 +1,4 @@
-const mockTasks = [
+const initialState = [
  {
    id: 1,
    title: 'Learn Redux',
@@ -13,6 +13,11 @@ const mockTasks = [
  },
 ];
 
-export default function tasks(state = { tasks: mockTasks }, action) {
+export default function tasks(state = initialState, action) {
+ if (action.type === 'CREATE_TASK') {
+   return state.concat(action.payload);
+ }
+
  return state;
 }
+

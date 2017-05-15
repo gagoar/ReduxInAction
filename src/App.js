@@ -27,7 +27,7 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    tasks: state.tasks
+    tasks: state
   }
 }
 
