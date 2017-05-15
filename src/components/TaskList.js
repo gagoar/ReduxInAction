@@ -59,7 +59,13 @@ class TaskList extends Component {
            </button>
          </form>
        )}
-       {this.props.tasks.map(task => <Task key={task.id} task={task}  />)}
+       {this.props.tasks.map(task => (
+           <Task
+               key={task.id}
+               task={task}
+               onStatusChange={this.props.onStatusChange}
+           />
+       ))}
      </div>
    );
  }
