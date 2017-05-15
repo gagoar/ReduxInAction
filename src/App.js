@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TaskList from './components/TaskList';
 import { connect } from 'react-redux';
+import { createTask } from './store/tasks/actions';
 
 class App extends Component {
   onCreateCard({ title, description }) {
@@ -11,6 +12,10 @@ class App extends Component {
         description
       }
     });
+  }
+
+  onCreateTask({ title, description }) {
+    this.props.dispatch(createTask({ title, description }));
   }
 
   render() {
@@ -27,5 +32,4 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(App);
-
 
