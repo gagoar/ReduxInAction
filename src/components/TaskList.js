@@ -23,17 +23,19 @@ class TaskList extends Component {
    this.setState({ description: e.target.value });
  }
 
- onSubmit = () => {
-   this.props.onSubmit({
-     title: this.state.title,
-     description: this.state.description,
-   });
+ onSubmit = (e) => {
+     e.preventDefault();
 
-   this.setState({
-     showNewTaskForm: false,
-     title: '',
-     description: '',
-   });
+     this.props.onSubmit({
+         title: this.state.title,
+         description: this.state.description,
+     });
+
+     this.setState({
+         showNewTaskForm: false,
+         title: '',
+         description: '',
+     });
  }
 
  render() {
@@ -48,7 +50,7 @@ class TaskList extends Component {
          </span>
        </div>
        {this.state.showNewTaskForm && (
-         <form onSubmit={this.onSubmit}>
+         <form onSubmit={this.onSubmit.bind(this)}>
            <input onChange={this.onTitleChange} value={this.state.title} style={formStyle.formControlFullWidth} type="text" placeholder="title" />
            <input onChange={this.onDescriptionChange} value={this.state.subscription} style={formStyle.formControlFullWidth} type="text" placeholder="description" />
            <button
@@ -61,7 +63,7 @@ class TaskList extends Component {
        )}
        {this.props.tasks.map(task => (
            <Task
-               key={task.id}
+               key={task.title}
                task={task}
                onStatusChange={this.props.onStatusChange}
            />

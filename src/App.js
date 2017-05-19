@@ -30,7 +30,7 @@ class App extends Component {
 
               <TaskList
                   tasks={this.props.tasks}
-                  onSubmit={this.onCreateCard}
+                  onSubmit={this.onCreateCard.bind(this)}
                   onStatusChange={this.onStatusChange.bind(this)}
               />
           </div>
