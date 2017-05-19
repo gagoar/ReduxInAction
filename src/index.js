@@ -8,9 +8,28 @@ import { configureStore } from './store'
 
 const store = configureStore(tasks);
 
+// enabling webpack hot-reload feature
+
+if (module.hot) {
+    module.hot.accept('./App', () => {
+        const NextApp = require('./App').default;
+
+        ReactDOM.render(
+            <NextApp />,
+            document.getElementById('root')
+        );
+    })
+
+    module.hot.accept('./reducers', () => {
+        const nextRootReducer = require('./reducers').default;
+        store.replaceReducer(nextRootReducer);
+    });
+}
+
 ReactDOM.render(
- <Provider store={store}>
-   <App />
- </Provider>,
- document.getElementById('root')
+    <Provider store={store}>
+        <App />
+    </Provider>,
+    document.getElementById('root')
 );
+
