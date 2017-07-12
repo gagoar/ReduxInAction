@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import TaskList from './components/TaskList';
 import { connect } from 'react-redux';
-import { createTask, editTask } from './actions';
+
+import { createTask, editTask, fetchTasks } from './actions';
 
 class App extends Component {
+    componentDidMount() {
+        this.props.dispatch(fetchTasks());
+    }
+
   onCreateCard({ title, description }) {
     this.props.dispatch({
       type: 'CREATE_TASK',
