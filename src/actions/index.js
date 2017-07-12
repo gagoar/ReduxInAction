@@ -1,4 +1,4 @@
-import axios from 'axios';
+import * as api from '../api';
 
 let _id = 1;
 
@@ -28,20 +28,17 @@ export function editTask(id, params) {
  }
 }
 
-export function fetchTasksSucceeded(tasks) {
+export function fetchTasksSucceeded(data) {
   return {
     type: 'FETCH_TASKS_SUCCEEDED',
-    payload: {
-      tasks
-    }
+    payload: data
   }
 }
 
 export function fetchTasks() {
-  return dispatch => {  //#B
-    axios.get('http://localhost:3001/tasks')
-      .then(resp => {
-        dispatch(fetchTasksSucceeded(resp.data));
-      });
-  }
+  return dispatch => {
+    api.fetchTasks().then(resp => {
+      dispatch(fetchTasksSucceeded(resp.data));
+    });
+  };
 }
